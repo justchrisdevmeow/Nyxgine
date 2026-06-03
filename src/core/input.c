@@ -1,4 +1,5 @@
 #include "input.h"
+#include <string.h>
 
 static Window* window = NULL;
 static int keys[512] = {0};
