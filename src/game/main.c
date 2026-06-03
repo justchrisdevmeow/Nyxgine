@@ -27,7 +27,7 @@ static const char* fragment_shader =
     "}\n";
 
 int main(void) {
-    Window* win = window_create(800, 600, "Nyxgine - Physics Sandbox");
+    Window* win = window_create(800, 600, "Nyxgine");
     if (!win) return -1;
     
     glewExperimental = GL_TRUE;
@@ -45,7 +45,7 @@ int main(void) {
     
     RigidBody* rb = rigidbody_create(vec3(0, 2, 0), 1.0f);
     
-    float last_time = time_now();
+    glEnable(GL_DEPTH_TEST);
     
     while (!window_should_close(win)) {
         time_update();
@@ -78,22 +78,21 @@ int main(void) {
         
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST);
         
         shader_use(shader);
-        shader_set_mat4(shader, "view", view.m);
-        shader_set_mat4(shader, "projection", proj.m);
+        shader_set_mat4(shader, "view", &view.m[0][0]);
+        shader_set_mat4(shader, "projection", &proj.m[0][0]);
         
         // Draw ground
         Mat4 ground_model = mat4_identity();
-        shader_set_mat4(shader, "model", ground_model.m);
+        shader_set_mat4(shader, "model", &ground_model.m[0][0]);
         shader_set_vec3(shader, "color", 0.4f, 0.5f, 0.3f);
         mesh_draw(ground);
         
         // Draw cube
         Mat4 cube_model = mat4_translate(rb->position);
         cube_model = mat4_mul(cube_model, mat4_scale(vec3(0.5f, 0.5f, 0.5f)));
-        shader_set_mat4(shader, "model", cube_model.m);
+        shader_set_mat4(shader, "model", &cube_model.m[0][0]);
         shader_set_vec3(shader, "color", 1.0f, 0.3f, 0.3f);
         mesh_draw(cube);
         
