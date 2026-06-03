@@ -5,7 +5,6 @@
 #include "../render/mesh.h"
 #include "../render/camera.h"
 #include "../physics/rigidbody.h"
-#include "../../libs/glad.h"
 #include <stdio.h>
 
 static const char* vertex_shader =
