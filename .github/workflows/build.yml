@@ -1,6 +1,9 @@
 name: Build Nyxgine
 
-on: push
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,12 +15,13 @@ jobs:
         run: |
           curl -L https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.bin.WIN64.zip -o glfw.zip
           unzip glfw.zip
+          dir glfw-3.4.bin.WIN64
       
-      - name: Compile
+      - name: Compile Nyxgine
         run: |
           gcc libs/glad.c src/game/main.c src/math/vec3.c src/math/mat4.c src/math/quat.c src/core/window.c src/core/input.c src/core/time.c src/render/shader.c src/render/mesh.c src/render/camera.c src/physics/rigidbody.c -I glfw-3.4.bin.WIN64/include -I libs -I src/math -I src/core -I src/render -I src/physics -L glfw-3.4.bin.WIN64/lib-mingw-w64 -lglfw3 -lopengl32 -lgdi32 -lm -o nyxgine.exe
       
       - uses: actions/upload-artifact@v4
         with:
-          name: nyxgine
+          name: nyxgine-windows
           path: nyxgine.exe
