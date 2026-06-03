@@ -1,7 +1,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <GL/gl.h>
+#include "../../libs/glad.h"
 
 typedef struct {
     unsigned int vao, vbo;
