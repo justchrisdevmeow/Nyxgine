@@ -4,7 +4,6 @@
 
 Mesh* mesh_create_cube(void) {
     float vertices[] = {
-        // positions          // normals           // uvs
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
          0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
          0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
@@ -58,15 +57,10 @@ Mesh* mesh_create_cube(void) {
     glBindBuffer(GL_ARRAY_BUFFER, m->vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
-    // position (3 floats)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    
-    // normal (3 floats)
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    
-    // uv (2 floats)
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
     
@@ -107,7 +101,6 @@ Mesh* mesh_create_plane(float size) {
 }
 
 Mesh* mesh_create_sphere(float radius, int rings, int sectors) {
-    // Simplified: returns a cube for now (add full sphere later)
     return mesh_create_cube();
 }
 
