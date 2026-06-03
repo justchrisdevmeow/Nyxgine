@@ -1,7 +1,7 @@
 #include "shader.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <GL/glew.h>
+#include <GL/gl.h>
 
 static unsigned int compile_shader(const char* src, unsigned int type) {
     unsigned int id = glCreateShader(type);
