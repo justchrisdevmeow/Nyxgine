@@ -1,6 +1,8 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "../../libs/glad.h"
+
 typedef struct {
     unsigned int id;
 } Shader;
