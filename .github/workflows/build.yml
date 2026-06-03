@@ -10,14 +10,14 @@ jobs:
       
       - name: Install dependencies
         run: |
+          curl -L https://github.com/nigels-com/glew/releases/download/glew-2.1.0/glew-2.1.0-win32.zip -o glew.zip
+          unzip glew.zip
           curl -L https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.bin.WIN64.zip -o glfw.zip
           unzip glfw.zip
-          curl -L https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip -o glew.zip
-          unzip glew.zip
       
       - name: Compile
         run: |
-          gcc src/game/main.c src/math/*.c src/core/*.c src/render/*.c src/physics/*.c -I glfw-3.4.bin.WIN64/include -I glew-2.2.0/include -L glfw-3.4.bin.WIN64/lib-mingw-w64 -L glew-2.2.0/lib/Release/x64 -lglfw3 -lglew32 -lopengl32 -lgdi32 -lm -o nyxgine.exe
+          gcc src/game/main.c src/math/*.c src/core/*.c src/render/*.c src/physics/*.c -I glfw-3.4.bin.WIN64/include -I glew-2.1.0/include -L glfw-3.4.bin.WIN64/lib-mingw-w64 -L glew-2.1.0/lib/Release/x64 -lglfw3 -lglew32 -lopengl32 -lgdi32 -lm -o nyxgine.exe
       
       - uses: actions/upload-artifact@v4
         with:
